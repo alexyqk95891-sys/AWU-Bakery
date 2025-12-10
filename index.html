@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>AWU Bakery | Small-batch Desserts in Sydney</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="AWU Bakery 小批量精品烘焙，卷卷、饼干与巴斯克。Pick-up in inner Sydney." />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --accent: #c6784a;
+      --accent-soft: #f5e4d6;
+      --text-main: #222222;
+      --text-muted: #777777;
+      --border: #e6e6e6;
+      --radius: 16px;
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.04);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* NAV */
+    header.nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(230,230,230,0.9);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+    }
+
+    .logo-mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--accent);
+      transition: width .22s ease;
+    }
+
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      padding: 7px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      background: #b0663f;
+    }
+
+    /* MOBILE NAV */
+    .nav-toggle {
+      display: none;
+      border: none;
+      background: transparent;
+      padding: 4px;
+      cursor: pointer;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      border-radius: 999px;
+      background: #444;
+      margin: 4px 0;
+    }
+
+    .nav-mobile {
+      display: none;
+      border-top: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    .nav-mobile a {
+      display: block;
+      padding: 8px 0;
+      font-size: 0.9rem;
+    }
+
+    .page.nav-open .nav-mobile { display: block; }
+
+    main { padding-bottom: 40px; }
+    section { padding: 32px 0; }
+
+    /* HERO */
+    .hero {
+      padding: 40px 0 28px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 3.1vw + 1.3rem, 3.2rem);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .hero-title span { color: var(--accent); }
+
+    .hero-sub {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-bottom: 20px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid #eee;
+      font-size: 0.78rem;
+      background: #fafafa;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .btn-primary {
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(198,120,74,0.40);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 32px rgba(198,120,74,0.5);
+    }
+
+    .btn-ghost {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .hero-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .hero-note strong { color: #444; }
+
+    .hero-card {
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 16px;
+      background: #fff;
+    }
+
+    .hero-card-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .hero-card-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .hero-list {
+      list-style: none;
+      font-size: 0.82rem;
+      color: #555;
+      display: grid;
+      gap: 6px;
+    }
+
+    /* SECTION HEADERS */
+    .section-header { margin-bottom: 20px; }
+
+    .section-eyebrow {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+
+    .section-sub {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 520px;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0,1.3fr) minmax(0,1fr);
+      gap: 24px;
+      align-items: flex-start;
+      font-size: 0.92rem;
+    }
+
+    .card {
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 18px 16px;
+      box-shadow: var(--shadow-soft);
+      background: #fff;
+    }
+
+    .tag-row {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 0.78rem;
+    }
+
+    .tag {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid #eee;
+      background: #fafafa;
+    }
+
+    /* MENU GALLERY */
+    .category {
+      margin-top: 18px;
+    }
+
+    .cat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .cat-header h2 { font-size: 1.2rem; }
+    .cat-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
+      gap: 16px;
+    }
+
+    .product-card {
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: #fff;
+      padding: 14px 14px 12px;
+      box-shadow: var(--shadow-soft);
+      font-size: 0.9rem;
+    }
+    .product-thumb {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      object-fit: cover;
+      max-height: 220px;  /* 可以改大一点，比如 260，看你图片比例 */
+    }
+
+
+    .product-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .product-name small {
+      font-weight: 400;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-left: 4px;
+    }
+
+    .product-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .product-price {
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    .product-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ORDER */
+    .order-grid {
+      display: grid;
+      grid-template-columns: minmax(0,1.2fr) minmax(0,1fr);
+      gap: 24px;
+      align-items: flex-start;
+      font-size: 0.9rem;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .field label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .field input,
+    .field textarea {
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 7px 9px;
+      font-size: 0.86rem;
+      outline: none;
+      background: #fcfcfc;
+    }
+
+    .field textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(198,120,74,0.28);
+      background: #fff;
+    }
+
+    .form-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 14px 0 20px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 880px) {
+      .hero-grid,
+      .about-grid,
+      .order-grid {
+        grid-template-columns: minmax(0,1fr);
+      }
+      .hero {
+        padding-top: 28px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: inline-flex; }
+      section { padding: 26px 0; }
+      .hero-grid { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page" id="page">
+  <!-- NAV -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="logo">
+        <div class="logo-mark">awu</div>
+        AWU BAKERY
+      </div>
+      <nav class="nav-links">
+        <a href="#top">Home</a>
+        <a href="#menu-gallery">Menu</a>
+        <a href="#order">Order</a>
+        <button class="nav-cta" onclick="scrollToId('order')">下单 / 咨询</button>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="container nav-mobile">
+      <a href="#top" onclick="closeNav()">Home</a>
+      <a href="#menu-gallery" onclick="closeNav()">Menu 菜单画廊</a>
+      <a href="#order" onclick="closeNav()">Order 下单</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div>
+          <div class="hero-eyebrow">SMALL-BATCH DESSERTS · SYDNEY</div>
+          <h1 class="hero-title">
+            小批量 <span>面包 · 巴斯克 · 卷卷 · 饼干</span><br>为你专门烤一炉。
+          </h1>
+          <p class="hero-sub">
+            AWU Bakery 是一个小而认真的烘焙品牌。专注小批量现烤面包与甜点，
+            配方和烤焙时间都像做实验一样被反复推敲，希望你吃到的是轻盈、不过分甜但难忘的味道。
+          </p>
+          <div class="hero-badges">
+            <span class="badge">Small-batch micro bakery</span>
+            <span class="badge">Made to order · 按单制作</span>
+            <span class="badge">Pick-up in inner Sydney</span>
+          </div>
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="scrollToId('menu-gallery')">查看菜单画廊</button>
+            <button class="btn-ghost" onclick="scrollToId('order')">我要下单 / 咨询</button>
+          </div>
+          <p class="hero-note">
+            <strong>取货：</strong>Inner Sydney 附近，确认订单后提供具体位置。<br>
+            若需送货可私信商量时间与范围。
+          </p>
+        </div>
+        <aside class="hero-card">
+          <div class="hero-card-title">本周热门 · Highlights</div>
+          <div class="hero-card-sub">实际口味会根据当周菜单稍作调整。</div>
+          <ul class="hero-list">
+            <li>· 咸奶油奥利奥生巧卷 —— 微咸奶油配生巧与奥利奥碎。</li>
+            <li>· 烤茶柚子冻卷 —— 焙茶香气配清爽柚子冻。</li>
+            <li>· 抹茶巴斯克 —— 浓郁抹茶乳香，适合抹茶爱好者。</li>
+            <li>· 朗姆酒提子白脱饼干 —— 酒香与干果，适合傍晚的一杯茶。</li>
+            <li>· 巧克力磅蛋糕 —— 适合切片冷冻，随时回烤一片。</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">ABOUT</div>
+          <h2 class="section-title">一人实验室，也是小型烘焙室。</h2>
+          <p class="section-sub">
+            白天在实验室做科研，早晨和晚上在烤箱前调配温度、时间与配方。
+            AWU Bakery 更像一个“小批量甜品实验室”，很多配方都在不断微调中。
+          </p>
+        </div>
+        <div class="about-grid">
+          <div>
+            <p>我喜欢那种“刚刚好”的甜度和口感：面包要松软有湿度；卷卷要轻盈柔软但有结构；饼干要酥香，但咬下去不是齁甜；巴斯克要有一点流心感，又不会糊嘴。</p>
+            <p>每次上线的口味不会太多，这样可以把当天的精力集中在少量订单上，
+              确保每一炉都处在比较理想的状态——比起“很多很多种类”，我更在意的是“今天这几样有多好吃”。</p>
+            <div class="tag-row">
+              <span class="tag">小批量 · Small-batch</span>
+              <span class="tag">配方控 · Recipe-obsessed</span>
+              <span class="tag">Made to order</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="section-eyebrow" style="margin-bottom:6px;">HOW TO ORDER</div>
+            <p>1. 向下滑到菜单画廊，选好你感兴趣的口味与数量。</p>
+            <p>2. 通过微信 / Instagram / 下方表单发送订单给我。</p>
+            <p>3. 我会确认当天烤炉排期、取货时间和大致完成时间。</p>
+            <p>4. 约定时间来取，或根据情况协商送货（视距离和时间而定）。</p>
+            <p style="font-size:0.8rem;color:var(--text-muted);margin-top:6px;">
+              建议提前 <strong>2 天</strong> 预订；节假日或大单请尽早告诉我。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU GALLERY -->
+    <section id="menu-gallery">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">MENU</div>
+          <h2 class="section-title">Menu · 菜单画廊</h2>
+          <p class="section-sub">
+            这里展示目前常驻 /  轮换的面包、卷卷、饼干、巴斯克等产品。未来也会加入高含水吐司、恰巴塔、佛卡夏、浮云卷等系列。价格为参考价，实际会根据季节和原料	   稍作调整。
+          </p>
+        </div>
+
+        <!-- 卷卷 -->
+        <section class="category">
+          <div class="cat-header">
+            <div>
+              <h2>卷卷 · Swiss Rolls</h2>
+              <div class="cat-sub">Full roll / Half roll 可选 · 建议 2 天前预订</div>
+            </div>
+          </div>
+          <div class="product-grid">
+            <article class="product-card">
+	      <img src="images/奥利奥生巧.jpg" alt="咸奶油奥利奥生巧卷" class="product-thumb">
+              <div class="product-name">咸奶油奥利奥生巧卷 <small>Signature</small></div>
+              <p class="product-desc">
+                微咸奶油包裹奥利奥碎与生巧克力，甜度克制但很有存在感。
+              </p>
+              <div class="product-price">$55 Full roll · $30 Half roll</div>
+              <div class="product-note">适合分享 / 派对 · 无酒精</div>
+            </article>
+
+            <article class="product-card">
+              <img src="images/黑芝麻.jpg" alt="黑芝麻卷" class="product-thumb">
+              <div class="product-name">黑芝麻卷</div>
+              <p class="product-desc">
+                炭焙黑芝麻酱与奶油打发成细腻内馅，香气浓郁、回味像坚果。
+              </p>
+              <div class="product-price">$45 Full roll · $25 Half roll</div>
+              <div class="product-note">芝麻控必试</div>
+            </article>
+
+            <article class="product-card">
+	      <img src="images/焙茶柚子.jpg" alt="焙茶柚子冻卷" class="product-thumb">
+              <div class="product-name">焙茶柚子冻卷</div>
+              <p class="product-desc">
+                焙火茶香配上清爽柚子冻，像夏天傍晚的微风，茶味与果香都在。
+              </p>
+              <div class="product-price">$45 Full roll · $25 Half roll</div>
+            </article>
+
+	    <article class="product-card">
+	      <img src="images/焙茶芒果.jpg" alt="焙茶芒果卷" class="product-thumb">
+              <div class="product-name">焙茶芒果卷</div>
+              <p class="product-desc">
+                 以焙茶卷体包裹清爽茉莉奶油，焙茶的温润焦香与芒果的果香甜味形成鲜明对比，
+    		 整体口味轻盈却有层次，是夏季人气特别高的一款清爽系卷卷。
+              </p>
+              <div class="product-price">$55 Full roll · $30 Half roll</div>
+            </article>
+
+            <article class="product-card">
+	      <img src="images/伯爵栗子.jpg" alt="伯爵茶栗子卷" class="product-thumb">
+              <div class="product-name">伯爵茶栗子卷</div>
+              <p class="product-desc">
+                伯爵茶风味蛋糕体配轻盈栗子奶油，适合搭配一杯热茶慢慢吃。
+              </p>
+              <div class="product-price">$45 Full roll · $25 Half roll</div>
+            </article>
+
+            <article class="product-card">
+	      <img src="images/抹茶柚子冻.jpg" alt="抹茶柚子冻卷" class="product-thumb">
+              <div class="product-name">抹茶柚子冻卷</div>
+              <p class="product-desc">
+                浓抹茶与柚子果冻的组合，带一点清爽酸度，平衡抹茶的厚重感。
+              </p>
+              <div class="product-price">$45 Full roll · $25 Half roll</div>
+            </article>
+
+	    <article class="product-card">
+	      <img src="images/抹茶干纳许.jpg" alt="抹茶干纳许卷" class="product-thumb">
+              <div class="product-name">抹茶干纳许卷</div>
+              <p class="product-desc">
+                使用五十铃抹茶粉制作而成，内层夹入丝滑抹茶干纳许，抹茶的清苦与法芙娜白巧香味完美融合，
+    	        整体口感扎实又细腻，是抹茶控必吃的浓厚系卷卷。
+              </p>
+              <div class="product-price">$60 Full roll · $35 Half roll</div>
+            </article>
+
+            <article class="product-card">
+	      <img src="images/抹茶生巧.jpg" alt="茉莉抹茶生巧卷" class="product-thumb">
+              <div class="product-name">茉莉抹茶生巧卷</div>
+              <p class="product-desc">
+                将茉莉花清香融合抹茶的微苦与生巧克力的柔滑，入口先是茉莉的香气再到抹茶厚度，
+   	        最后以生巧的丝滑作收尾。层次清新而不腻，是抹茶控与花香控都会爱的一款。
+              </p>
+              <div class="product-price">$55 Full roll · $30 Half roll</div>
+            </article>
+
+	    <article class="product-card">
+	      <img src="images/巧克力生巧.jpg" alt="巧克力生巧卷" class="product-thumb">
+              <div class="product-name">巧克力生巧卷</div>
+              <p class="product-desc">
+                使用66%法芙娜黑巧克力制作的蛋糕胚，奶油和生巧，卷体柔软、内馅丝滑浓郁，
+    		巧克力香气饱满却不甜腻，是重度巧克力爱好者的必试款。
+              </p>
+              <div class="product-price">$55 Full roll · $30 Half roll</div>
+            </article>
+
+	    <article class="product-card">
+	      <img src="images/巧克力青提.jpg" alt="巧克力青提卷" class="product-thumb">
+              <div class="product-name">巧克力青提卷</div>
+              <p class="product-desc">
+                使用柔软法芙娜66%黑巧克力卷体搭配清爽鲜甜的青提果粒，加上轻盈茉莉奶油，
+    		形成清爽与浓郁并存的口感。青提的果香提升了整体层次，是一款出乎意料的清新系巧克力卷。。
+              </p>
+              <div class="product-price">$55 Full roll · $30 Half roll</div>
+            </article>
+
+            <article class="product-card">
+	      <img src="images/伯爵奶冻.jpg" alt="伯爵奶冻卷" class="product-thumb">
+              <div class="product-name">伯爵奶冻卷</div>
+              <p class="product-desc">
+                伯爵茶卷体中间藏着柔软奶冻，像一杯加了奶的伯爵茶被做成了甜品。
+              </p>
+              <div class="product-price">$45 Full roll · $25 Half roll</div>
+            </article>
+          </div>
+        </section>
+
+        <!-- 白脱饼干 -->
+        <section class="category">
+          <div class="cat-header">
+            <div>
+              <h2>空气白脱饼干 · Butter Sandwich Cookies</h2>
+              <div class="cat-sub">$8 / 块 · 适合拼盒 · 建议冷藏保存</div>
+            </div>
+          </div>
+          <div class="product-grid">
+            <article class="product-card">
+	      <img src="images/巧克力白脱.jpg" alt="巧克力生巧白脱饼干" class="product-thumb">
+              <div class="product-name">巧克力生巧白脱饼干</div>
+              <p class="product-desc">
+                可可风味饼干夹柔软生巧克力，适合重度巧克力爱好者。
+              </p>
+              <div class="product-price">$8 / 块</div>
+            </article>
+
+            <article class="product-card">
+	      <img src="images/焙茶柚子柠檬.jpg" alt="焙茶柚子柠檬白脱饼干" class="product-thumb">
+              <div class="product-name">焙茶柚子柠檬白脱饼干</div>
+              <p class="product-desc">
+                焙茶饼干体配柚子柠檬调味奶油，茶香与柑橘香气叠加。
+              </p>
+              <div class="product-price">$8 / 块</div>
+            </article>
+
+            <article class="product-card">
+	      <img src="images/焙茶杏子.jpg" alt="焙茶杏子白脱饼干" class="product-thumb">
+              <div class="product-name">焙茶杏子白脱饼干</div>
+              <p class="product-desc">
+                焙茶与杏子果酱结合，甜度适中，适合下午茶。
+              </p>
+              <div class="product-price">$8 / 块</div>
+            </article>
+
+            <article class="product-card">
+	      <img src="images/莓果双重奏.jpg" alt="莓果双重奏白脱饼干" class="product-thumb">
+              <div class="product-name">莓果双重奏白脱饼干</div>
+              <p class="product-desc">
+                草莓奶油和树莓库力叠加在饼干之间，一口就是满满果香。
+              </p>
+              <div class="product-price">$8 / 块</div>
+            </article>
+
+	    <article class="product-card">
+	      <img src="images/话梅菠萝.jpg" alt="话梅菠萝白脱饼干" class="product-thumb">
+              <div class="product-name">话梅菠萝白脱饼干</div>
+              <p class="product-desc">
+                以酸甜清新的话梅与菠萝制成内馅，搭配酥香厚实的黑巧克力饼干，
+    		风味层次丰富、酸甜开胃，是非常具有创意的果香系口味。
+              </p>
+              <div class="product-price">$8 / 块</div>
+            </article>
+
+            <article class="product-card">
+	      <img src="images/朗姆酒提子.jpg" alt="朗姆酒提子白脱饼干" class="product-thumb">
+              <div class="product-name">朗姆酒提子白脱饼干</div>
+              <p class="product-desc">
+                浸泡朗姆酒的提子搭配厚实奶油，香气浓郁，微醺感明显。
+              </p>
+              <div class="product-price">$8 / 块</div>
+              <div class="product-note">含酒精 · 不建议儿童食用</div>
+            </article>
+
+            <article class="product-card">
+	      <img src="images/抹茶白脱.jpg" alt="抹茶白脱饼干" class="product-thumb">
+              <div class="product-name">抹茶白脱饼干</div>
+              <p class="product-desc">
+                抹茶饼干与抹茶干纳许奶油的双抹组合，苦甜平衡。
+              </p>
+              <div class="product-price">$8 / 块</div>
+            </article>
+          </div>
+        </section>
+
+        <!-- 巴斯克 & 磅蛋糕 -->
+        <section class="category">
+          <div class="cat-header">
+            <div>
+              <h2>巴斯克 & 磅蛋糕 · Basque Cheesecake & Pound Cake</h2>
+              <div class="cat-sub">适合小聚会 / 家庭常备切片</div>
+            </div>
+          </div>
+          <div class="product-grid">
+            <article class="product-card">
+              <div class="product-name">伯爵茶巴斯克</div>
+              <p class="product-desc">
+                伯爵茶香融在奶香芝士中，口感绵密、表面微焦。
+              </p>
+              <div class="product-price">$18 · 四寸</div>
+            </article>
+
+            <article class="product-card">
+	      <img src="images/焙茶巴斯克.jpg" alt="焙茶巴斯克" class="product-thumb">
+              <div class="product-name">焙茶巴斯克</div>
+              <p class="product-desc">
+                焙火茶香版本巴斯克，风味更内敛，适合不爱太甜的人。
+              </p>
+              <div class="product-price">$20 · 四寸</div>
+            </article>
+
+            <article class="product-card">
+	      <img src="images/抹茶巴斯克.jpg" alt="抹茶巴斯克" class="product-thumb">
+              <div class="product-name">抹茶巴斯克</div>
+              <p class="product-desc">
+                抹茶控必试款，抹香浓郁，配黑咖啡很搭。
+              </p>
+              <div class="product-price">$22 · 四寸</div>
+            </article>
+
+            <article class="product-card">
+	      <img src="images/开心果巴斯克.jpg" alt="开心果巴斯克" class="product-thumb">
+              <div class="product-name">开心果巴斯克</div>
+              <p class="product-desc">
+                坚果香浓郁的开心果版本，脂香感更明显。
+              </p>
+              <div class="product-price">$18 · 四寸</div>
+            </article>
+
+	    <article class="product-card">
+	      <img src="images/黑松露火腿.jpg" alt="黑松露火腿巴斯克" class="product-thumb">
+              <div class="product-name">黑松露火腿巴斯克</div>
+              <p class="product-desc">
+                将黑松露的高级香气与咸香火腿融合在柔滑巴斯克体中，咸甜平衡、风味立体，
+    		是适合作为前菜、红酒搭配的特别款。
+              </p>
+              <div class="product-price">$18 · 四寸</div>
+            </article>
+
+	    <article class="product-card">
+	      <img src="images/豆乳巴斯克.jpg" alt="豆乳巴斯克" class="product-thumb">
+              <div class="product-name">豆乳巴斯克</div>
+              <p class="product-desc">
+                使用浓厚豆乳，使巴斯克整体更加轻盈，带有自然豆香与柔和甜感，
+    		是追求清爽、不易腻口风味的首选。
+              </p>
+              <div class="product-price">$18 · 四寸</div>
+            </article>
+
+            <article class="product-card">
+	      <img src="images/巧克力磅蛋糕.jpg" alt="巧克力磅蛋糕" class="product-thumb">
+              <div class="product-name">巧克力磅蛋糕</div>
+              <p class="product-desc">
+                湿润巧克力蛋糕体，切片后冷冻也可以，想吃时回烤即可。
+              </p>
+              <div class="product-price">$45 / 条</div>
+            </article>
+
+            <article class="product-card">
+	      <img src="images/原味磅蛋糕.jpg" alt="原味磅蛋糕" class="product-thumb">
+              <div class="product-name">原味磅蛋糕</div>
+              <p class="product-desc">
+                经典黄油香味，组织细腻，适合当早餐或下午茶。
+              </p>
+              <div class="product-price">$35 / 条</div>
+            </article>
+
+	    <article class="product-card">
+	      <img src="images/枣泥磅蛋糕.jpg" alt="枣泥磅蛋糕" class="product-thumb">
+  	      <div class="product-name">枣泥磅蛋糕</div>
+              <p class="product-desc">
+                使用自煮枣泥与黄油打发，甜度温和、香气浓郁，带微微黏润的口感，
+                非常适合作为茶点或早餐搭配牛奶/黑咖啡。
+              </p>
+              <div class="product-price">$45 / 条</div>
+              <div class="product-note">建议冷藏保存，食用前可轻微回烤提升香气。</div>
+            </article>
+
+	    <article class="product-card">
+	      <img src="images/抹茶磅蛋糕.jpg" alt="抹茶磅蛋糕" class="product-thumb">
+  	      <div class="product-name">抹茶磅蛋糕</div>
+              <p class="product-desc">
+                使用五十铃抹茶粉制作，茶香浓郁、口感扎实湿润，
+   		带有淡淡苦韵与奶香平衡的风味。
+              </p>
+              <div class="product-price">$45 / 条</div>
+              <div class="product-note">建议冷藏保存，食用前可轻微回烤提升香气。</div>
+            </article>
+
+          </div>
+        </section>
+
+        <section style="padding-top:10px;">
+          <p style="font-size:0.82rem;color:var(--text-muted);">
+            部分口味会根据季节调整；若有想尝试的组合也可以私信讨论定制。
+          </p>
+        </section>
+      </div>
+    </section>
+
+    <!-- ORDER -->
+    <section id="order">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">ORDER</div>
+          <h2 class="section-title">下单与咨询</h2>
+          <p class="section-sub">
+            建议先看一遍菜单画廊，然后通过微信 / Instagram / 下方表单把你想要的面包或者甜点的种类、口味、日期和时间发给我。
+          </p>
+        </div>
+        <div class="order-grid">
+          <div class="card">
+	    <p style="font-size:0.86rem;margin-bottom:10px;">
+              <strong>微信：</strong>awuawuawuuuuuuuu<br>
+              <strong>Instagram：</strong>暂未开通
+            </p>
+
+            <p style="font-size:0.86rem;">
+              可以直接留言：<br>
+              · 想要的日期与大概时间<br>
+              · 产品和数量（例如：咸奶油奥利奥生巧全卷 1 条 + 朗姆酒提子白脱饼干 4 块）<br>
+              · 是否有忌口 / 过敏（坚果、酒精等）
+            </p>
+            <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;">
+              我会尽量在不影响产品质量的前提下，帮你调整甜度、酒精感等细节。
+            </p>
+          </div>
+          <div class="card">
+            <form onsubmit="handleForm(event)">
+              <div class="field">
+                <label for="name">姓名 Name</label>
+                <input id="name" required />
+              </div>
+              <div class="field">
+                <label for="contact">联系方式（微信号 / 邮箱）</label>
+                <input id="contact" required />
+              </div>
+              <div class="field">
+                <label for="date">希望取货时间</label>
+                <input id="date" placeholder="例如：本周六 下午 3 点左右" />
+              </div>
+              <div class="field">
+                <label for="items">想要的产品和数量</label>
+                <textarea id="items" placeholder="例如：咸奶油奥利奥生巧全卷 1 条 + 朗姆酒提子白脱饼干 4 块"></textarea>
+              </div>
+              <div class="field">
+                <label for="notes">备注 / 忌口</label>
+                <textarea id="notes" placeholder="是否能吃酒精、坚果，甜度偏好等"></textarea>
+              </div>
+              <button class="btn-primary" type="submit">生成消息并复制（发给我）</button>
+              <div class="form-note" id="formNote">
+                点击后会帮你生成一段文字并复制到剪贴板，你再粘贴到微信 / 邮箱发送即可。
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> AWU Bakery · Small-batch bakery · Bread & desserts in Sydney</span>
+      <span>Pickup in inner Sydney · exact location after confirmation</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+  function scrollToId(id){
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  }
+
+  const pageEl = document.getElementById('page');
+  const navToggle = document.getElementById('navToggle');
+
+  function closeNav(){
+    pageEl.classList.remove('nav-open');
+  }
+
+  if (navToggle) {
+    navToggle.addEventListener('click', () => {
+      pageEl.classList.toggle('nav-open');
+    });
+  }
+
+  function handleForm(e){
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const contact = document.getElementById('contact').value.trim();
+    const date = document.getElementById('date').value.trim();
+    const items = document.getElementById('items').value.trim();
+    const notes = document.getElementById('notes').value.trim();
+
+    let text =
+      "AWU Bakery 订单 / 咨询：\n\n" +
+      "姓名：" + name + "\n" +
+      "联系方式：" + contact + "\n" +
+      "希望取货时间：" + date + "\n\n" +
+      "想要的产品：\n" + items + "\n\n" +
+      "备注 / 忌口：\n" + notes + "\n";
+
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => {
+        document.getElementById('formNote').textContent =
+          "已复制生成的消息，请粘贴到微信 / 邮箱发给我。";
+      }).catch(() => {
+        alert(text);
+      });
+    } else {
+      alert(text);
+    }
+  }
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
